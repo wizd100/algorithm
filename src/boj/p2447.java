@@ -3,49 +3,48 @@ package boj;
 import java.util.Scanner;
 
 public class p2447 {
+    static char[][] arr;
+
     public static void main(String[] args) {
-        int n;
-        Scanner scanner = new Scanner(System.in);
-        n = scanner.nextInt();
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        arr = new char[N][N];
+        StringBuilder sb = new StringBuilder();
 
-        int[][] arr;
-        arr = new int[n][n];
-
-        for (int i = 0; i < arr.length; i++) {
-            for (int j = 0; j < arr[i].length; j++) {
-                draw(i, j, n);
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
+                arr[i][j] = ' ';
             }
-            System.out.println();
         }
+
+        star(0, 0, N);
+
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
+                sb.append(arr[i][j]);
+            }
+            sb.append("\n");
+        }
+
+        System.out.println(sb);
     }
 
-    public static void draw(int i, int j, int size) {
-        if (i % 3 == 1 && j % 3 == 1) {
-            System.out.print(" ");
+    public static void star(int x, int y, int n) {
+        if (n == 1) {
+            arr[x][y] = '*';
             return;
         }
 
-        i /= 3;
-        j /= 3;
-        size /= 3;
-        draw(i, j, size);
+        n /= 3;
 
-        if (i / size == 1 && j / size == 1) {
-            System.out.print(" ");
-            return;
-        }
-        System.out.print("*");
-    }
+        for (int i = 0; i < 3; i++) {
+           for (int j = 0; j < 3; j++) {
+               if (i == 1 && j == 1) {
+                   continue;
+               }
 
-    public static void star(int n) {
-        if (n <= 0) {
-            return;
+               star(x + (i * n), y + (j * n), n);
+           }
         }
-        for (int i = 0; i < n; i++) {
-            System.out.print("*");
-        }
-        System.out.println();
-        n--;
-        star(n);
     }
 }
