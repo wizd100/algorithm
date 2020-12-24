@@ -14,9 +14,7 @@ public class P2108 {
         int[] countPlusNum = new int[4001];
         int[] countMinusNum = new int[4001];
         int temp = 0;
-        int countMode = 0;
-        int countMax = 0;
-        ArrayList<Integer> numMode = new ArrayList<>();
+        ArrayList<Integer> arrModeNum = new ArrayList<>();
 
         for (int i = 0; i < N; i++) {
             num[i] = sc.nextInt();
@@ -46,34 +44,28 @@ public class P2108 {
 
             if (temp <= countPlusNum[i]) {
                 if (temp < countPlusNum[i]) {
-                    countMode = 0;
-                    numMode.clear();
+                    arrModeNum.clear();
                 }
                 temp = countPlusNum[i];
-                countMax = i;
-                countMode++;
-                numMode.add(i);
+                arrModeNum.add(i);
             }
 
             if (temp <= countMinusNum[i]) {
                 if (temp < countMinusNum[i]) {
-                    countMode = 0;
-                    numMode.clear();
+                    arrModeNum.clear();
                 }
                 temp = countMinusNum[i];
-                countMax = i * -1;
-                countMode++;
-                numMode.add(i * -1);
+                arrModeNum.add(i * -1);
             }
         }
 
-        if (countMode == 1) {
-            System.out.println(countMax);
-        } else if (countMode == N) {
+        if (arrModeNum.size() == 1) {
+            System.out.println(arrModeNum.get(0));
+        } else if (arrModeNum.size() == N) {
             System.out.println(num[1]);
         } else {
-            Collections.sort(numMode);
-            System.out.println(numMode.get(1));
+            Collections.sort(arrModeNum);
+            System.out.println(arrModeNum.get(1));
         }
 
         //범위
