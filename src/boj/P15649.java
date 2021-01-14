@@ -8,8 +8,5 @@ public class P15649 {
         int N = sc.nextInt();
         int M = sc.nextInt();
 
-        while (true) {
-            
-        }
-    }
+        
 }
